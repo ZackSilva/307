@@ -1,16 +1,43 @@
-# This is a sample Python script.
+# Imports psutil, the needed package for the assignment
+import subprocess
+import psutil
+import os
+import platform
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# First function to display requested information to script user
+def showOS():
+    # Since os.uname doesn't work on Windows, the function will detect an error and except it
+    # by instead running the platform module
+    print("The operating system of this machine is:")
+    while True:
+        try:
+            print(os.uname())
+            break
+        except AttributeError:
+            print(platform.system() + platform.release())
+            break
+
+# Displays system's current logged-in users
+def showUsers():
+    print("The users currently logged on include:")
+    print(psutil.users())
+
+# Displays short list of currently running system processes
+def showProcesses():
+    print()
+
+# Starts Python 3 on running machine
+def invokePy():
+    psutil.Process().nice(psutil.ABOVE_NORMAL_PRIORITY_CLASS)
+    p = subprocess.Popen
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Uses regex to find Python3 process and kill it
+def killPy():
+    print()
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    showOS()
+    showUsers()
+    showProcesses()
+    killPy()
