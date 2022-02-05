@@ -1,21 +1,11 @@
 # Imports psutil, the needed package for the assignment
 import subprocess
 import psutil
-import os
-import platform
 
 # First function to display requested information to script user
 def showOS():
-    # Since os.uname doesn't work on Windows, the function will detect an error and except it
-    # by instead running the platform module
-    print("The operating system of this machine is:")
-    while True:
-        try:
-            print(os.uname())
-            break
-        except AttributeError:
-            print(platform.system() + platform.release())
-            break
+    print()
+
 
 # Displays system's current logged-in users
 def showUsers():
@@ -24,20 +14,33 @@ def showUsers():
 
 # Displays short list of currently running system processes
 def showProcesses():
-    print()
+    for process in psutil.process_iter():
+        try:
+            pname = process.name()
+            pid = process.pid
+            print(pname, '***', pid)
+        except(psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
 
 # Starts Python 3 on running machine
 def invokePy():
-    psutil.Process().nice(psutil.ABOVE_NORMAL_PRIORITY_CLASS)
-    p = subprocess.Popen
+    pname = 'python.exe'
+    psutil.Popen('python')
 
 
-# Uses regex to find Python3 process and kill it
+# Finds Python3 process and kill it
 def killPy():
-    print()
+    for process in psutil.process_iter():
+        if process.cmdline() == 'python':
+            process.terminate()
+            break
+    else:
+        print('Python 3 not found; unable to terminate.')
+        psutil.Popen('python')
 
 if __name__ == '__main__':
     showOS()
     showUsers()
     showProcesses()
+    invokePy()
     killPy()
