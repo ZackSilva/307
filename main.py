@@ -18,7 +18,8 @@ if __name__ == '__main__':
         # Displays to the user the destination IP, protocol, and basic
         # contents of localhost packets
         def getVulnPackets():
-
+            print(sniff(filter='tcp', count=5))
+            print(sniff(prn=lambda x:x.summary(), count=5))
             print()
 
         # Runs all nested functions
