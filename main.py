@@ -5,6 +5,7 @@ if __name__ == '__main__':
     from scapy.all import *
     from datetime import datetime
     from datetime import date
+
     # Parent function for all subfunctions
     def PyFi():
         print("Welcome to PyFi.")
@@ -16,13 +17,18 @@ if __name__ == '__main__':
             print("localhost not found. Error code: " %error)
 
         # Function to get the current time and date
-        def getDateTime():
+        def GetDateTime():
             print(f"Date: {date.today()}")
             now = datetime.now()
             timeNow = now.strftime('%H:%M:%S')
             print(f"Time: {timeNow}")
             print("-" * 25)
 
-        getDateTime()
+        def SniffWifi():
+            print()
+
+
+        GetDateTime()
+        SniffWifi()
 
     PyFi()
