@@ -15,4 +15,14 @@ if __name__ == '__main__':
         except socket.error as error:
             print("localhost not found. Error code: " %error)
 
+        # Function to get the current time and date
+        def getDateTime():
+            print(f"Date: {date.today()}")
+            now = datetime.now()
+            timeNow = now.strftime('%H:%M:%S')
+            print(f"Time: {timeNow}")
+            print("-" * 25)
+
+        getDateTime()
+
     PyFi()
