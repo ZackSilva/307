@@ -3,6 +3,7 @@
 if __name__ == '__main__':
     import socket
     from scapy.all import *
+    import pandas
     from datetime import datetime
     from datetime import date
 
@@ -15,6 +16,7 @@ if __name__ == '__main__':
             print(f"localhost found. Name: {localhost}")
         except socket.error as error:
             print("localhost not found. Error code: " %error)
+        print(f"localhost IP address: {socket.gethostbyname(localhost)}")
 
         # Function to get the current time and date
         def GetDateTime():
@@ -22,7 +24,7 @@ if __name__ == '__main__':
             now = datetime.now()
             timeNow = now.strftime('%H:%M:%S')
             print(f"Time: {timeNow}")
-            print("-" * 25)
+            print("~" * 40)
 
         def SniffWifi():
             print()
