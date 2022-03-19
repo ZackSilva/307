@@ -1,4 +1,4 @@
-# PyFi is a WINDOWS utility that utilizes a host's wireless NIC to
+# PyFi is a LINUX utility that utilizes a host's wireless NIC to
 # scan the local network for adjacent WiFi-utilizing devices
 
 if __name__ == '__main__':
@@ -39,6 +39,7 @@ if __name__ == '__main__':
 
             pkt = sniff(count=1, filter="ip")
 
+            # Profiles sniffed network packets based on presence of IEEE 802.11 protocol (WiFi)
             def callback(pkt):
                 if pkt[0].haslayer(Dot11Beacon):
                     bssid = packet[Dot11].addr2
@@ -53,10 +54,29 @@ if __name__ == '__main__':
                     crypto = stats.get("crypto")
                     local_devices.loc[bssid] = (ssid, dbm_signal, channel, crypto)
 
+                # Prints discovered info
+                def print_all():
                     while True:
                         os.system("clear")
                         print(local_devices)
                         time.sleep(0.5)
+
+                # Sends prompt to localhost to change WiFi NIC's channel
+                def change_channel():
+                    ch = 1
+                    while True:
+                        os.system(f"iwconfig {interface} channel {ch}")
+                        ch = ch % 14 + 1
+                        time.sleep(0.5)
+
+                interface = sys.argv[1] if len(sys.argv) > 1 else '.'
+                printer = Thread(target=print_all)
+                printer.daemon = True
+                printer.start()
+                channel_changer = Thread(target=change_channel)
+                channel_changer.daemon = True
+                channel_changer.start()
+                sniff(prn=callback, iface=interface)
 
             callback(pkt)
 
