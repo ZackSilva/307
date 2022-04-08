@@ -1,16 +1,20 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    import selenium
+    import webbrowser
+    class PyScraper:
+        print("Welcome to PyScraper.")
+        print("*" * 30)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        # This function prompts the user for a website URL in the format
+        # 'www.<URL>.<.com or other TLD>'
+        def GetWebsite(self, website):
+            website = input("Please enter a website URL using the format 'www.<URL>.<.com or other TLD>':")
+            return website
+
+        # This function leverages Selenium to open Firefox
+        def OpenBrowser():
+            webbrowser.open(website)
+
+        GetWebsite()
+        OpenBrowser()
+
