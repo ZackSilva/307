@@ -1,10 +1,8 @@
+# Imports and defines dependencies to leverage Firefox with Selenium capabilities
+from selenium import webdriver
+browser = webdriver.Firefox()
+type(browser)
 if __name__ == '__main__':
-
-    # Imports and defines dependencies to leverage Firefox with Selenium capabilities
-    from selenium import webdriver
-    browser = webdriver.Firefox()
-    type(browser)
-
     def PyScraper():
         print("Welcome to PyScraper.")
         print("*" * 30)
@@ -16,7 +14,7 @@ if __name__ == '__main__':
 
             # This function leverages Selenium to open the inputted URL via Firefox
             def OpenBrowser():
-                browser.get(website)
+                browser.get('https://' + website)
 
             OpenBrowser()
 
