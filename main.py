@@ -8,17 +8,25 @@ import bs4
 browser = webdriver.Firefox()
 type(browser)
 
-# Grabs commandline arguments
-def GetArgs():
+# Grabs commandline arguments and requests the search page
+def GetArgs(res):
     print('Searching...')  # display text while downloading the search result page
-    res = requests.get('https://google.com/search?q=' 'https://pypi.org/search/?q='+ ' '.join(sys.argv[1:]))
+    res = requests.get('https://google.com/search?q=' 'https://www.blackhat.com/html/bh-media-archives/bh-archives-2000.html'
+                       + ' '.join(sys.argv[1:]))
     res.raise_for_status()
+
+# Grabs desired website information
+def GetResults(res):
+    soup = bs4.BeautifulSoup(res.text, 'html.parser')
+    linkElems = soup.select('.package-snippet')
 
 # Function to implement PyLoader, the main function for this utility
 def PyLoader():
+    res = None
     print("Welcome to PyLoader!")
     print('~' * 40)
-    GetArgs()
+    GetArgs(res)
+    GetResults(res)
 
 if __name__ == '__main__':
     PyLoader()
