@@ -5,8 +5,8 @@ import requests
 import sys
 import webbrowser
 import bs4
-browser = webdriver.Firefox()
-type(browser)
+#browser = webdriver.Firefox()
+#type(browser)
 
 # Grabs commandline arguments and requests the search page
 def GetArgs(res):
@@ -17,7 +17,7 @@ def GetArgs(res):
 
 # Grabs desired website information
 def GetResults(res):
-    soup = bs4.BeautifulSoup(res.text, 'html.parser')
+    soup = bs4.BeautifulSoup(res.text, 'html.parser') # 'NoneType' object has no attr 'text'
     linkElems = soup.select('.package-snippet')
 
 # Function to implement PyLoader, the main function for this utility
