@@ -24,7 +24,7 @@ def GetResults(res):
 def PyLoader():
     res = None
     print("Welcome to PyLoader!")
-    print('~' * 40)
+    print('~' * 30)
     GetArgs(res)
     GetResults(res)
 
