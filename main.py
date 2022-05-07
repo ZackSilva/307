@@ -1,32 +1,19 @@
-# Imports and defines dependencies to leverage Firefox with Selenium capabilities
-import selenium
-from selenium import webdriver
-import requests
-import sys
-import webbrowser
-import bs4
-#browser = webdriver.Firefox()
-#type(browser)
+# Imports the pygeoip package to leverage geolocation functions
+import pygeoip
+gi = pygeoip.GeoIP('GeoIP.dat')
+print("Welcome to PyLocator.")
+print('*' * 30)
 
-# Grabs commandline arguments and requests the search page
-def GetArgs(res):
-    print('Searching...')  # display text while downloading the search result page
-    res = requests.get('https://google.com/search?q=' 'https://www.blackhat.com/html/bh-media-archives/bh-archives-2000.html'
-                       + ' '.join(sys.argv[1:]))
-    res.raise_for_status()
+# Function to ask the user for an IP address for analysis
+def getIP(address):
+    address = input("Please provide an IP address:")
 
-# Grabs desired website information
-def GetResults(res):
-    soup = bs4.BeautifulSoup(res.text, 'html.parser') # 'NoneType' object has no attr 'text'
-    linkElems = soup.select('.package-snippet')
+# Function to leverage the pygeoip package for specific geolocation
+def scanIP(address):
 
-# Function to implement PyLoader, the main function for this utility
-def PyLoader():
-    res = None
-    print("Welcome to PyLoader!")
-    print('~' * 30)
-    GetArgs(res)
-    GetResults(res)
 
 if __name__ == '__main__':
-    PyLoader()
+    address = None
+    getIP(address)
+    scanIP(address)
+
