@@ -4,28 +4,22 @@ import socket
 import ssl
 
 # This function reads the domains.txt file provided in the assignment
-def ReadInput():
+def PyVal():
     filepath = input("Please enter the full file path of the file's location:")
     domains_txt = open(filepath, 'r')
     print('Based on the file inputted, below are the domains to be evaluated:')
     print('-' * 70)
-    print(domains_txt.read())
-
     lines = domains_txt.readlines()
     count = 0
     for line in lines:
         count += 1
-        print("Line{}: {}".format(count, line.strip()))
+        print("Line{}: {}".format(count, line))
+        domain = format(count, line())
+        context = ssl.create_default_context()
+        with socket.create_connection(domain, 443) as sock:
+            with context.wrap_socket(sock, server_hostname=domain) as ssock:
+                print(ssock.version())
 
-# To validate active SSL certificates
-def EvalInput():
-    print()
-
-# This function outputs a log file from the evaluated file_contents variable store
-def OutputLog():
-    print()
 
 if __name__ == '__main__':
-    ReadInput()
-    EvalInput()
-    OutputLog()
+    PyVal()
